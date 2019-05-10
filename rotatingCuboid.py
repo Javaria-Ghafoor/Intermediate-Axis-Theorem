@@ -1,6 +1,6 @@
 from __future__ import division  # this allows use of integers in fractions
 
-# Javaria Ghafoor, rotating cuboid in zero-g, intermediate axis theorem, 09/05/2019
+# Javaria Ghafoor, rotating cuboid in zero-g, intermediate axis theorem, 10/05/2019
 
 from visual import *  # visual library
 from visual.graph import *  # graphing library
@@ -23,7 +23,7 @@ x = 2
 y = 4
 z = 7
 
-cuboid = box(omega=vector(0.002,8,0.002), pos=(0, 0, 0), length=2*x, height=2*y, wodth=2*z, mass=10)
+cuboid = box(omega=vector(0.002, 0.005, 8), pos=(0, 0, 0), length=2*x, height=2*y, wodth=2*z, mass=10)
 cuboid.color = color.yellow;
 
 """moment of inertias"""
@@ -40,7 +40,7 @@ basis_vectors.append(vector(0, 0, 1.))
 
 """Create axis objects"""
 
-# these objects indicate the initial orientation of the object. All share the same origin, the length 4 is for visibility
+# these objects indicate the initial orientation of the object. All share the same origin, the length 8 is for visibility
 xaxis = arrow(pos=(0, 0, 0), axis=(0, 0, 8), shaftwidth=.1, color=color.red, opacity=.5)
 yaxis = arrow(pos=(0, 0, 0), axis=(8, 0, 0), shaftwidth=.1, color=color.green, opacity=.5)
 zaxis = arrow(pos=(0, 0, 0), axis=(0, 8, 0), shaftwidth=.1, color=color.blue, opacity=.5)
@@ -53,11 +53,11 @@ axis_List.append(zaxis)
 """Create vector objects"""
 
 # these vectors will indicate the magnitudes of angular momenta along the basis vectors, as well as a total w.
-xvec = arrow(pos=(10, 0, 0), length=(Ixx * cuboid.omega.x) / 5, axis=basis_vectors[0], shaftwidth=.1, color=color.red,
+xvec = arrow(pos=(10, 0, 0), length=(Ixx * cuboid.omega.x) / 5000, axis=basis_vectors[0], shaftwidth=.1, color=color.red,
              opacity=.7)
-yvec = arrow(pos=(10 + xvec.length, 0, 0), length=(Iyy * cuboid.omega.y) / 5, axis=basis_vectors[1], shaftwidth=.1,
+yvec = arrow(pos=(10 + xvec.length, 0, 0), length=(Iyy * cuboid.omega.y) / 5000, axis=basis_vectors[1], shaftwidth=.1,
              color=color.green, opacity=.7)
-zvec = arrow(pos=(10 + xvec.length, yvec.length, 0), length=(Izz * cuboid.omega.z) / 5, axis=basis_vectors[2],
+zvec = arrow(pos=(10 + xvec.length, yvec.length, 0), length=(Izz * cuboid.omega.z) / 5000, axis=basis_vectors[2],
              shaftwidth=.1, color=color.blue, opacity=.7)
 
 totvec = arrow(pos=(10, 0, 0),
