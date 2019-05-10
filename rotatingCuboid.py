@@ -19,18 +19,18 @@ scene.background = color.black
 
 """creating object cuboid"""
 
-x = 1
-y = 2
-z = 4
+x = 2
+y = 4
+z = 7
 
-cuboid = box(omega=vector(0.1,0.1,4), pos=(0, 0, 0), length=2*x, height=2*y, wodth=2*z, mass=1)
+cuboid = box(omega=vector(0.002,8,0.002), pos=(0, 0, 0), length=2*x, height=2*y, wodth=2*z, mass=10)
 cuboid.color = color.yellow;
 
 """moment of inertias"""
 
-Ixx = (x*y^3*z+x*y*z^3)*cuboid.mass/3
-Iyy = (x^3*y*z+z*y*z^3)*cuboid.mass/3
-Izz = (x^3*y*z+x*y^3*z)*cuboid.mass/3
+Ixx = (y^2+z^2)*cuboid.mass/6
+Iyy = (x^2+z^2)*cuboid.mass/6
+Izz = (x^2+y^2)*cuboid.mass/6
 
 # form a basis
 basis_vectors = []
@@ -41,9 +41,9 @@ basis_vectors.append(vector(0, 0, 1.))
 """Create axis objects"""
 
 # these objects indicate the initial orientation of the object. All share the same origin, the length 4 is for visibility
-xaxis = arrow(pos=(0, 0, 0), axis=(0, 4, 0), shaftwidth=.1, color=color.red, opacity=.5)
-yaxis = arrow(pos=(0, 0, 0), axis=(0, 0, 4), shaftwidth=.1, color=color.green, opacity=.5)
-zaxis = arrow(pos=(0, 0, 0), axis=(4, 0, 0), shaftwidth=.1, color=color.blue, opacity=.5)
+xaxis = arrow(pos=(0, 0, 0), axis=(0, 0, 8), shaftwidth=.1, color=color.red, opacity=.5)
+yaxis = arrow(pos=(0, 0, 0), axis=(8, 0, 0), shaftwidth=.1, color=color.green, opacity=.5)
+zaxis = arrow(pos=(0, 0, 0), axis=(0, 8, 0), shaftwidth=.1, color=color.blue, opacity=.5)
 
 axis_List = []  # putting the axes in a list for simplicity
 axis_List.append(xaxis)
@@ -53,11 +53,11 @@ axis_List.append(zaxis)
 """Create vector objects"""
 
 # these vectors will indicate the magnitudes of angular momenta along the basis vectors, as well as a total w.
-xvec = arrow(pos=(10, 0, 0), length=(Ixx * cuboid.omega.x) / 500, axis=basis_vectors[0], shaftwidth=.1, color=color.red,
+xvec = arrow(pos=(10, 0, 0), length=(Ixx * cuboid.omega.x) / 5, axis=basis_vectors[0], shaftwidth=.1, color=color.red,
              opacity=.7)
-yvec = arrow(pos=(10 + xvec.length, 0, 0), length=(Iyy * cuboid.omega.y) / 500, axis=basis_vectors[1], shaftwidth=.1,
+yvec = arrow(pos=(10 + xvec.length, 0, 0), length=(Iyy * cuboid.omega.y) / 5, axis=basis_vectors[1], shaftwidth=.1,
              color=color.green, opacity=.7)
-zvec = arrow(pos=(10 + xvec.length, yvec.length, 0), length=(Izz * cuboid.omega.z) / 500, axis=basis_vectors[2],
+zvec = arrow(pos=(10 + xvec.length, yvec.length, 0), length=(Izz * cuboid.omega.z) / 5, axis=basis_vectors[2],
              shaftwidth=.1, color=color.blue, opacity=.7)
 
 totvec = arrow(pos=(10, 0, 0),
